@@ -1,5 +1,3 @@
-version: '3.9'
-
 services:
   nginx:
     image: nginx:latest
@@ -35,7 +33,6 @@ services:
 
   mongodb:
     image: mongo:latest
-    container_name: mongodb
     restart: always
     depends_on:
       - nginx
@@ -45,6 +42,9 @@ services:
       - mongo_data:/data/db
     networks:
       - backend
+    deploy:
+      mode: replicated
+      replicas: 2
 
 volumes:
   mongo_data:
